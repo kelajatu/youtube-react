@@ -16,13 +16,10 @@ export function SideBarFooter() {
         <div>Test new features</div>
       </div>
       <div className="footer-block">
-        <div>All prices include VAT</div>
+        <div>All prices include Tax</div>
       </div>
       <div className="footer-block">
-        <div>
-          © Productioncoder.com - A Youtube clone for educational purposes under
-          fair use.
-        </div>
+        <div>© Jurgen Kela - A Youtube clone for portfolio purposes.</div>
       </div>
     </React.Fragment>
   );
