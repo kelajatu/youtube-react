@@ -21,7 +21,7 @@ exports[`SideBarHeader renders with title 1`] = `
   <MenuHeader
     className="side-bar-header"
   >
-    JUST A TITLE
+    TITLE
   </MenuHeader>
 </MenuItem>
 `;
