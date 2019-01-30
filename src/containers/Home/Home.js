@@ -4,6 +4,10 @@ import "./Home.scss";
 
 export class Home extends React.Component {
   render() {
-    return <VideoPreview />;
+    return (
+      <div className="home">
+        <VideoPreview />
+      </div>
+    );
   }
 }
