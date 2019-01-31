@@ -9,7 +9,7 @@ export class Subscriptions extends React.Component {
       <React.Fragment>
         <SideBarHeader title="Subscriptions" />
         <Subscription label="MusicChannel" broadcasting />
-        <Subscription label="Coursea" amountNewVideos={10} />
+        <Subscription label="Coursea" amountNewVideos={11} />
         <Subscription label="TEDx Talks" amountNewVideos={23} />
         <Subscription label="Stanford iOS" amountNewVideos={4} />
         <Subscription label="Udacity" amountNewVideos={114} />
