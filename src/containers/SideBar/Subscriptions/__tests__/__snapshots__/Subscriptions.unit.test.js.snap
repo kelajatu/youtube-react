@@ -10,7 +10,7 @@ exports[`Subscriptions renders 1`] = `
     label="MusicChannel"
   />
   <Subscription
-    amountNewVideos={10}
+    amountNewVideos={11}
     label="Coursea"
   />
   <Subscription
