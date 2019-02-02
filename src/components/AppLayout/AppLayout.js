@@ -1,6 +1,6 @@
 import React from "react";
-import "./AppLayout.scss";
 import HeaderNav from "../../containers/HeaderNav/HeaderNav";
+import "./AppLayout.scss";
 
 export function AppLayout(props) {
   return (

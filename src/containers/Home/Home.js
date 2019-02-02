@@ -1,7 +1,7 @@
 import React from "react";
-import "./Home.scss";
 import { VideoGrid } from "../../components/VideoGrid/VideoGrid";
 import { SideBar } from "../SideBar/SideBar";
+import "./Home.scss";
 
 export class Home extends React.Component {
   render() {

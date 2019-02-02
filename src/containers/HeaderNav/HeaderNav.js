@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Icon, Image, Input, Menu } from "semantic-ui-react";
-import "./HeaderNav.scss";
 import logo from "../../assets/images/logo.jpg";
+import "./HeaderNav.scss";
 
 export class HeaderNav extends React.Component {
   render() {
