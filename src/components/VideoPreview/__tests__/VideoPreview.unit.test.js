@@ -7,4 +7,9 @@ describe("VideoPreview", () => {
     const wrapper = shallow(<VideoPreview />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it("renders horizontally", () => {
+    const wrapper = shallow(<VideoPreview horizontal={true} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
