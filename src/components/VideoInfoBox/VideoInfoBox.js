@@ -3,6 +3,12 @@ import "./VideoInfoBox.scss";
 import { Image, Button } from "semantic-ui-react";
 
 export class VideoInfoBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapsed: true
+    };
+  }
   render() {
     return (
       <div className="video-info-box">
@@ -27,4 +33,11 @@ export class VideoInfoBox extends React.Component {
       </div>
     );
   }
+  onToggleCollapseButtonClick = () => {
+    this.setState(prevState => {
+      return {
+        collapsed: !prevState.collapsed
+      };
+    });
+  };
 }
