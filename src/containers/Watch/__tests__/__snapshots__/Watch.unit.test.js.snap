@@ -8,6 +8,10 @@ exports[`Watch renders 1`] = `
     className="video"
     id="-7fuHEEmEjs"
   />
+  <VideoMetadata
+    className="metadata"
+    viewCount={1000}
+  />
   <div
     className="metadata"
     style={
