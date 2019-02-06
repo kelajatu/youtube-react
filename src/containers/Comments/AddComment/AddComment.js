@@ -4,7 +4,7 @@ import { Form, Image, TextArea } from "semantic-ui-react";
 
 export function AddComment() {
   return (
-    <div className="add-commnent">
+    <div className="add-comment">
       <Image
         className="user-image"
         src="http://via.placeholder.com/48x48"
