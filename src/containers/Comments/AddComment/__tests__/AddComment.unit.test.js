@@ -5,6 +5,6 @@ import { AddComment } from "../AddComment";
 describe("AddComment", () => {
   it("AddComment renders correctly", () => {
     const wrapper = shallow(<AddComment />);
-    expect(wrapper).toMatchSnapshoto();
+    expect(wrapper).toMatchSnapshot();
   });
 });
