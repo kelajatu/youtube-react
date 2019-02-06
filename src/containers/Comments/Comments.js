@@ -1,2 +1,12 @@
 import React from "react";
-import { Button, Icon } from "semantic-ui-react";
+import { CommentsHeader } from "./CommentsHeader/CommentsHeader";
+
+export class Comments extends React.Component {
+  render() {
+    return (
+      <div>
+        <CommentsHeader amoountComments={this.props.amoountComments} />
+      </div>
+    );
+  }
+}
