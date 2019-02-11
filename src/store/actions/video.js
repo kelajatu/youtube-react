@@ -7,6 +7,7 @@ import {
 } from "./index";
 
 export const MOST_POPULAR = createRequestTypes("MOST_POPULAR");
+
 export const mostPopular = {
   request: (amount, loadDescription, nextPageToken) =>
     createAction(MOST_POPULAR[REQUEST], {
