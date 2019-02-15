@@ -4,6 +4,7 @@ import "./VideoPreview.scss";
 
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
+import { getShortNumberString } from "../../services/number/number-format";
 
 TimeAgo.locale(en);
 const timeAgo = new TimeAgo("en-US");
@@ -44,8 +45,11 @@ export class VideoPreview extends React.Component {
 
   static getFormattedViewAndTime(video) {
     const publicationDate = new Date(video.snippet.publishedAt);
-    return `${video.statistics.viewCount} views • ${timeAgo.format(
-      publicationDate
-    )}`;
+    const viewCount = video.statistics ? video.statistics.viewCount : null;
+    if (viewCount) {
+      const viewCountShort = getShortNumberString(video.statistics.viewCount);
+      return `${viewCountShort} views • ${timeAgo.format(publicationDate)}`;
+    }
+    return "";
   }
 }
