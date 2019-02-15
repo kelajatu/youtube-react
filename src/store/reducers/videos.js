@@ -19,6 +19,7 @@ export const initialState = {
   byCategory: {},
   related: {}
 };
+
 export default function videos(state = initialState, action) {
   switch (action.type) {
     case MOST_POPULAR[SUCCESS]:
@@ -208,6 +209,7 @@ function reduceRelatedVideos(responses, videoIds) {
  *   Selectors
  * */
 const getMostPopular = state => state.videos.mostPopular;
+
 export const getMostPopularVideos = createSelector(
   state => state.videos.byId,
   getMostPopular,
@@ -218,6 +220,7 @@ export const getMostPopularVideos = createSelector(
     return mostPopular.items.map(videoId => videosById[videoId]);
   }
 );
+
 export const getVideoCategoryIds = createSelector(
   state => state.videos.categories,
   categories => {

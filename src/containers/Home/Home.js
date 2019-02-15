@@ -28,6 +28,11 @@ class Home extends React.Component {
       this.props.fetchMostPopularVideos();
     }
   }
+
+  fetchCategoriesAndMostPopularVideos() {
+    this.props.fetchMostPopularVideos();
+    this.props.fetchVideoCategories();
+  }
 }
 
 function mapStateToProps(state) {
@@ -38,7 +43,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const fetchMostPopularVideos = videoActions.mostPopular.request;
-  return bindActionCreators({ fetchMostPopularVideos }, dispatch);
+  const fetchVideoCategories = videoActions.categories.request;
+  return bindActionCreators(
+    { fetchMostPopularVideos, fetchVideoCategories },
+    dispatch
+  );
 }
 
 export default connect(
