@@ -110,7 +110,6 @@ export function buildRelatedVideosRequest(videoId, amountRelatedVideos = 12) {
 /*
   Util - Youtube API boilerplate code
  */
-
 export function buildApiRequest(requestMethod, path, params, properties) {
   params = removeEmptyParams(params);
   let request;

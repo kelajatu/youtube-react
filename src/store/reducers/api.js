@@ -3,7 +3,6 @@ import { YOUTUBE_LIBRARY_LOADED } from "../actions/api";
 const initialState = {
   libraryLoaded: false
 };
-
 export default function(state = initialState, action) {
   switch (action.type) {
     case YOUTUBE_LIBRARY_LOADED:
@@ -14,5 +13,4 @@ export default function(state = initialState, action) {
       return state;
   }
 }
-
 export const getYoutubeLibraryLoaded = state => state.api.libraryLoaded;
