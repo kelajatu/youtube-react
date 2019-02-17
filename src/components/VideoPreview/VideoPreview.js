@@ -6,7 +6,6 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import { getShortNumberString } from "../../services/number/number-format";
 import { getVideoDurationString } from "../../services/date/date-format";
-import { Link } from "react-router-dom";
 
 TimeAgo.locale(en);
 const timeAgo = new TimeAgo("en-US");

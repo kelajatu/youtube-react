@@ -6,10 +6,12 @@ import { Watch } from "./containers/Watch/Watch";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { youtubeLibraryLoaded } from "./store/actions/api";
-import Trending from "./containers/Trending/Trending";
-import Search from "./containers/Search/Search";
+// import Trending from "./containers/Trending/Trending";
+// import Search from "./containers/Search/Search";
 
-const API_KEY = process.env.YOUTUBE_KEY;
+const API_KEY = `${process.env.REACT_YOUTUBE_KEY}`;
+
+console.log(API_KEY);
 
 class App extends Component {
   render() {
