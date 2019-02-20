@@ -58,6 +58,7 @@ export function* watchMostPopularVideos() {
 export function* watchVideoCategories() {
   yield takeEvery(videoActions.VIDEO_CATEGORIES[REQUEST], fetchVideoCategories);
 }
+
 export function* watchMostPopularVideosByCategory() {
   while (true) {
     const { categories } = yield take(
