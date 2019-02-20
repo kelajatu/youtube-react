@@ -1,7 +1,10 @@
 import { VideoGrid } from "../../../components/VideoGrid/VideoGrid";
 import React from "react";
 import "./HomeContent.scss";
-import { getMostPopularVideos } from "../../../store/reducers/videos";
+import {
+  getMostPopularVideos,
+  getVideosByCategory
+} from "../../../store/reducers/videos";
 import { connect } from "react-redux";
 
 const AMOUNT_TRENDING_VIDEOS = 12;
@@ -25,6 +28,7 @@ class HomeContent extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    videosByCategory: getVideosByCategory(state),
     mostPopularVideos: getMostPopularVideos(state)
   };
 }
