@@ -6,6 +6,7 @@ import { SideBar } from "../SideBar/SideBar";
 import HomeContent from "./HomeContent/HomeContent";
 import { bindActionCreators } from "redux";
 import { getYoutubeLibraryLoaded } from "../../store/reducers/api";
+import { getVideoCategoryIds } from "../../store/reducers/videos";
 
 class Home extends React.Component {
   render() {
@@ -37,15 +38,22 @@ class Home extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    youtubeLibraryLoaded: getYoutubeLibraryLoaded(state)
+    youtubeLibraryLoaded: getYoutubeLibraryLoaded(state),
+    videoCategories: getVideoCategoryIds(state)
   };
 }
 
 function mapDispatchToProps(dispatch) {
   const fetchMostPopularVideos = videoActions.mostPopular.request;
   const fetchVideoCategories = videoActions.categories.request;
+  const fetchMostPopularVideosByCategory =
+    videoActions.mostPopularByCategory.request;
   return bindActionCreators(
-    { fetchMostPopularVideos, fetchVideoCategories },
+    {
+      fetchMostPopularVideos,
+      fetchVideoCategories,
+      fetchMostPopularVideosByCategory
+    },
     dispatch
   );
 }
