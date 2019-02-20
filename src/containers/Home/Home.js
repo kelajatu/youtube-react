@@ -9,6 +9,13 @@ import { getYoutubeLibraryLoaded } from "../../store/reducers/api";
 import { getVideoCategoryIds } from "../../store/reducers/videos";
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categoryIndex: 0
+    };
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -26,8 +33,24 @@ class Home extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.youtubeLibraryLoaded !== prevProps.youtubeLibraryLoaded) {
-      this.props.fetchMostPopularVideos();
+      this.fetchCategoriesAndMostPopularVideos();
+    } else if (this.props.videoCategories !== prevProps.videoCategories) {
+      this.fetchVideosByCategory();
     }
+  }
+
+  fetchVideosByCategory() {
+    const categoryStartIndex = this.state.categoryIndex;
+    const categories = this.props.videoCategories.slice(
+      categoryStartIndex,
+      categoryStartIndex + 3
+    );
+    this.props.fetchMostPopularVideosByCategory(categories);
+    this.setState(prevState => {
+      return {
+        categoryIndex: prevState.categoryIndex + 3
+      };
+    });
   }
 
   fetchCategoriesAndMostPopularVideos() {
