@@ -28,6 +28,26 @@ export class Watch extends React.Component {
     const searchParams = new URLSearchParams(this.props.location.search);
     return searchParams.get("v");
   }
+
+  componentDidMount() {
+    if (this.props.youtubeLibraryLoaded) {
+      this.fetchWatchContent();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.youtubeLibraryLoaded !== prevProps.youtubeLibraryLoaded) {
+      this.fetchWatchContent();
+    }
+  }
+
+  fetchWatchContent() {
+    const videoId = this.getVideoId();
+    if (!videoId) {
+      this.props.history.push("/");
+    }
+    this.props.fetchWatchDetails(videoId, this.props.channelId);
+  }
 }
 
 function mapStateToProps(state) {
