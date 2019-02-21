@@ -5,11 +5,8 @@ import {
 } from "../actions/video";
 import { SUCCESS } from "../actions";
 import { createSelector } from "reselect";
-// import {
-//   SEARCH_LIST_RESPONSE,
-//   VIDEO_LIST_RESPONSE
-// } from "../api/youtube-api-response-types";
-// import { VIDEO_DETAILS, WATCH_DETAILS } from "../actions/watch";
+import { VIDEO_LIST_RESPONSE } from "../api/youtube-api-response-types";
+import { WATCH_DETAILS } from "../actions/watch";
 import { getSearchParam } from "../../services/url";
 
 export const initialState = {
@@ -32,8 +29,8 @@ export default function videos(state = initialState, action) {
         action.categories,
         state
       );
-    // case WATCH_DETAILS[SUCCESS]:
-    //   return reduceWatchDetails(action.response, state);
+    case WATCH_DETAILS[SUCCESS]:
+      return reduceWatchDetails(action.response, state);
     // case VIDEO_DETAILS[SUCCESS]:
     //   return reduceVideoDetails(action.response, state);
     default:
@@ -125,27 +122,27 @@ function groupVideosByIdAndCategory(response) {
   return { byId, byCategory };
 }
 
-// function reduceWatchDetails(responses, prevState) {
-//   const videoDetailResponse = responses.find(
-//     r => r.result.kind === VIDEO_LIST_RESPONSE
-//   );
-//   // we know that items will only have one element
-//   // because we explicitly asked for a video with a specific id
-//   const video = videoDetailResponse.result.items[0];
-//   const relatedEntry = reduceRelatedVideosRequest(responses);
+function reduceWatchDetails(responses, prevState) {
+  const videoDetailResponse = responses.find(
+    r => r.result.kind === VIDEO_LIST_RESPONSE
+  );
+  // we know that items will only have one element
+  // because we explicitly asked for a video with a specific id
+  const video = videoDetailResponse.result.items[0];
+  // const relatedEntry = reduceRelatedVideosRequest(responses);
 
-//   return {
-//     ...prevState,
-//     byId: {
-//       ...prevState.byId,
-//       [video.id]: video
-//     },
-//     related: {
-//       ...prevState.related,
-//       [video.id]: relatedEntry
-//     }
-//   };
-// }
+  return {
+    ...prevState,
+    byId: {
+      ...prevState.byId,
+      [video.id]: video
+    }
+    // related: {
+    //   ...prevState.related,
+    //   [video.id]: relatedEntry
+    // }
+  };
+}
 
 // function reduceRelatedVideosRequest(responses) {
 //   const relatedVideosResponse = responses.find(
