@@ -1,6 +1,7 @@
 import React from "react";
 import "./VideoInfoBox.scss";
 import { Image, Button } from "semantic-ui-react";
+import Linkify from "react-linkify";
 
 export class VideoInfoBox extends React.Component {
   constructor(props) {
@@ -44,6 +45,7 @@ export class VideoInfoBox extends React.Component {
       </div>
     );
   }
+
   onToggleCollapseButtonClick = () => {
     this.setState(prevState => {
       return {
@@ -51,4 +53,31 @@ export class VideoInfoBox extends React.Component {
       };
     });
   };
+
+  getDescriptionParagraphs() {
+    const videoDescription = this.props.video.snippet
+      ? this.props.video.snippet.description
+      : null;
+    if (!videoDescription) {
+      return null;
+    }
+    return videoDescription.split("\n").map((paragraph, index) => (
+      <p key={index}>
+        <Linkify>{paragraph}</Linkify>
+      </p>
+    ));
+  }
+
+  getConfig() {
+    let descriptionTextClass = "collapsed";
+    let buttonTitle = "Show More";
+    if (!this.state.collapsed) {
+      descriptionTextClass = "expanded";
+      buttonTitle = "Show Less";
+    }
+    return {
+      descriptionTextClass,
+      buttonTitle
+    };
+  }
 }
