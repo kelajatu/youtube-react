@@ -83,7 +83,9 @@ class Home extends React.Component {
 function mapStateToProps(state) {
   return {
     youtubeLibraryLoaded: getYoutubeLibraryLoaded(state),
-    videoCategories: getVideoCategoryIds(state)
+    videoCategories: getVideoCategoryIds(state),
+    videoCategoriesLoaded: videoCategoriesLoaded(state),
+    videosByCategoryLoaded: videosByCategoryLoaded(state)
   };
 }
 
