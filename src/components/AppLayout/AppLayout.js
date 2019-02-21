@@ -1,6 +1,6 @@
 import React from "react";
-import HeaderNav from "../../containers/HeaderNav/HeaderNav";
 import "./AppLayout.scss";
+import HeaderNav from "../../containers/HeaderNav/HeaderNav";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
 export function AppLayout(props) {
