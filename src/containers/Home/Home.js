@@ -6,7 +6,11 @@ import { SideBar } from "../SideBar/SideBar";
 import HomeContent from "./HomeContent/HomeContent";
 import { bindActionCreators } from "redux";
 import { getYoutubeLibraryLoaded } from "../../store/reducers/api";
-import { getVideoCategoryIds } from "../../store/reducers/videos";
+import {
+  getVideoCategoryIds,
+  videoCategoriesLoaded,
+  videosByCategoryLoaded
+} from "../../store/reducers/videos";
 
 class Home extends React.Component {
   constructor(props) {
@@ -20,7 +24,10 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <SideBar />
-        <HomeContent />
+        <HomeContent
+          bottomReachedCallback={this.bottomReachedCallback}
+          showLoader={this.shouldShowLoader()}
+        />
       </React.Fragment>
     );
   }
@@ -56,6 +63,20 @@ class Home extends React.Component {
   fetchCategoriesAndMostPopularVideos() {
     this.props.fetchMostPopularVideos();
     this.props.fetchVideoCategories();
+  }
+
+  bottomReachedCallback = () => {
+    if (!this.props.videoCategoriesLoaded) {
+      return;
+    }
+    this.fetchVideosByCategory();
+  };
+
+  shouldShowLoader() {
+    if (this.props.videoCategoriesLoaded && this.props.videosByCategoryLoaded) {
+      return this.state.categoryIndex < this.props.videoCategories.length;
+    }
+    return false;
   }
 }
 
