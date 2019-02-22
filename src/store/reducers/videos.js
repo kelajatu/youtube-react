@@ -126,37 +126,36 @@ function reduceWatchDetails(responses, prevState) {
   const videoDetailResponse = responses.find(
     r => r.result.kind === VIDEO_LIST_RESPONSE
   );
-  // we know that items will only have one element
-  // because we explicitly asked for a video with a specific id
+
   const video = videoDetailResponse.result.items[0];
-  // const relatedEntry = reduceRelatedVideosRequest(responses);
+  const relatedEntry = reduceRelatedVideosRequest(responses);
 
   return {
     ...prevState,
     byId: {
       ...prevState.byId,
       [video.id]: video
+    },
+    related: {
+      ...prevState.related,
+      [video.id]: relatedEntry
     }
-    // related: {
-    //   ...prevState.related,
-    //   [video.id]: relatedEntry
-    // }
   };
 }
 
-// function reduceRelatedVideosRequest(responses) {
-//   const relatedVideosResponse = responses.find(
-//     r => r.result.kind === SEARCH_LIST_RESPONSE
-//   );
-//   const { pageInfo, items, nextPageToken } = relatedVideosResponse.result;
-//   const relatedVideoIds = items.map(video => video.id.videoId);
+function reduceRelatedVideosRequest(responses) {
+  const relatedVideosResponse = responses.find(
+    r => r.result.kind === SEARCH_LIST_RESPONSE
+  );
+  const { pageInfo, items, nextPageToken } = relatedVideosResponse.result;
+  const relatedVideoIds = items.map(video => video.id.videoId);
 
-//   return {
-//     totalResults: pageInfo.totalResults,
-//     nextPageToken,
-//     items: relatedVideoIds
-//   };
-// }
+  return {
+    totalResults: pageInfo.totalResults,
+    nextPageToken,
+    items: relatedVideoIds
+  };
+}
 
 // function reduceVideoDetails(responses, prevState) {
 //   const videoResponses = responses.filter(
@@ -189,6 +188,7 @@ function reduceWatchDetails(responses, prevState) {
     return accumulator;
   }, {});
 }
+
 function reduceRelatedVideos(responses, videoIds) {
   const videoResponses = responses.filter(response => response.result.kind === SEARCH_LIST_RESPONSE);
   return videoResponses.reduce((accumulator, response, index) => {
