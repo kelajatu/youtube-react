@@ -2,7 +2,9 @@ import { fork, take, all, put, call } from "redux-saga/effects";
 import * as watchActions from "../actions/watch";
 import {
   buildVideoDetailRequest,
-  buildRelatedVideosRequest
+  buildRelatedVideosRequest,
+  buildChannelRequest,
+  buildCommentThreadRequest
 } from "../api/youtube-api";
 import { REQUEST } from "../actions";
 import {

@@ -5,7 +5,10 @@ import {
 } from "../actions/video";
 import { SUCCESS } from "../actions";
 import { createSelector } from "reselect";
-import { VIDEO_LIST_RESPONSE } from "../api/youtube-api-response-types";
+import {
+  SEARCH_LIST_RESPONSE,
+  VIDEO_LIST_RESPONSE
+} from "../api/youtube-api-response-types";
 import { WATCH_DETAILS } from "../actions/watch";
 import { getSearchParam } from "../../services/url";
 
@@ -126,7 +129,6 @@ function reduceWatchDetails(responses, prevState) {
   const videoDetailResponse = responses.find(
     r => r.result.kind === VIDEO_LIST_RESPONSE
   );
-
   const video = videoDetailResponse.result.items[0];
   const relatedEntry = reduceRelatedVideosRequest(responses);
 
