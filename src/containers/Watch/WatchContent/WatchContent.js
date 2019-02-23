@@ -5,7 +5,7 @@ import { VideoInfoBox } from "../../../components/VideoInfoBox/VideoInfoBox";
 import { Comments } from "../../Comments/Comments";
 import { RelatedVideos } from "../../../components/RelatedVideos/RelatedVideos";
 import "./WatchContent.scss";
-import { getVideoById } from "../../../store/reducers/videos";
+import { getRelatedVideos, getVideoById } from "../../../store/reducers/videos";
 import { connect } from "react-redux";
 
 class WatchContent extends React.Component {
@@ -27,6 +27,7 @@ class WatchContent extends React.Component {
 
 function mapStateToProps(state, props) {
   return {
+    relatedVideos: getRelatedVideos(state, props.videoId),
     video: getVideoById(state, props.videoId)
   };
 }
