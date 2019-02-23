@@ -9,7 +9,7 @@ import {
   SEARCH_LIST_RESPONSE,
   VIDEO_LIST_RESPONSE
 } from "../api/youtube-api-response-types";
-import { WATCH_DETAILS } from "../actions/watch";
+import { VIDEO_DETAILS, WATCH_DETAILS } from "../actions/watch";
 import { getSearchParam } from "../../services/url";
 
 export const initialState = {
@@ -265,12 +265,12 @@ const getRelatedVideoIds = (state, videoId) => {
   const related = state.videos.related[videoId];
   return related ? related.items : [];
 };
+
 export const getRelatedVideos = createSelector(
   getRelatedVideoIds,
   state => state.videos.byId,
   (relatedVideoIds, videos) => {
     if (relatedVideoIds) {
-      // filter kicks out null values we might have
       return relatedVideoIds
         .map(videoId => videos[videoId])
         .filter(video => video);
