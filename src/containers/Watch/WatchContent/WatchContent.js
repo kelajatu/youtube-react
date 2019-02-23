@@ -19,7 +19,10 @@ class WatchContent extends React.Component {
         <VideoMetadata video={this.props.video} />
         <VideoInfoBox className="video-info-box" video={this.props.video} />
         <Comments amountComments={112499} />
-        <RelatedVideos className="relatedVideos" />
+        <RelatedVideos
+          className="relatedVideos"
+          videos={this.props.relatedVideos}
+        />
       </div>
     );
   }
