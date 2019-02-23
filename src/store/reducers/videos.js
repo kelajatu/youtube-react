@@ -34,8 +34,8 @@ export default function videos(state = initialState, action) {
       );
     case WATCH_DETAILS[SUCCESS]:
       return reduceWatchDetails(action.response, state);
-    // case VIDEO_DETAILS[SUCCESS]:
-    //   return reduceVideoDetails(action.response, state);
+    case VIDEO_DETAILS[SUCCESS]:
+      return reduceVideoDetails(action.response, state);
     default:
       return state;
   }
@@ -159,27 +159,24 @@ function reduceRelatedVideosRequest(responses) {
   };
 }
 
-// function reduceVideoDetails(responses, prevState) {
-//   const videoResponses = responses.filter(
-//     response => response.result.kind === VIDEO_LIST_RESPONSE
-//   );
-//   const parsedVideos = videoResponses.reduce((videoMap, response) => {
-//     // we're explicitly asking for a video with a particular id
-//     // so the response set must either contain 0 items (if a video with the id does not exist)
-//     // or at most one item (i.e. the channel we've been asking for)
-//     const video = response.result.items ? response.result.items[0] : null;
-//     if (!video) {
-//       return videoMap;
-//     }
-//     videoMap[video.id] = video;
-//     return videoMap;
-//   }, {});
+function reduceVideoDetails(responses, prevState) {
+  const videoResponses = responses.filter(
+    response => response.result.kind === VIDEO_LIST_RESPONSE
+  );
+  const parsedVideos = videoResponses.reduce((videoMap, response) => {
+    const video = response.result.items ? response.result.items[0] : null;
+    if (!video) {
+      return videoMap;
+    }
+    videoMap[video.id] = video;
+    return videoMap;
+  }, {});
 
-//   return {
-//     ...prevState,
-//     byId: { ...prevState.byId, ...parsedVideos }
-//   };
-// }
+  return {
+    ...prevState,
+    byId: { ...prevState.byId, ...parsedVideos }
+  };
+}
 
 /* function reduceVideoDetails(responses) {
   const videoResponses = responses.filter(response => response.result.kind === VIDEO_LIST_RESPONSE);
