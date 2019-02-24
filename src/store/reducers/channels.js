@@ -14,3 +14,21 @@ export default function(state = initialState, action) {
       return state;
   }
 }
+
+function reduceWatchDetails(responses, prevState) {
+  const channelResponse = responses.find(
+    response => response.result.kind === CHANNEL_LIST_RESPONSE
+  );
+  let channels = {};
+  if (channelResponse && channelResponse.result.items) {
+    const channel = channelResponse.result.items[0];
+    channels[channel.id] = channel;
+  }
+  return {
+    ...prevState,
+    byId: {
+      ...prevState.byId,
+      ...channels
+    }
+  };
+}
