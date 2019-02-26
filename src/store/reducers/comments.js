@@ -22,3 +22,35 @@ function reduceWatchDetails(responses, videoId, prevState) {
   );
   return reduceCommentThread(commentThreadResponse.result, videoId, prevState);
 }
+
+function reduceCommentThread(response, videoId, prevState) {
+  if (!response) {
+    return prevState;
+  }
+  const newComments = response.items.reduce((acc, item) => {
+    acc[item.id] = item;
+    return acc;
+  }, {});
+
+  const prevCommentIds = prevState.byVideo[videoId]
+    ? prevState.byVideo[videoId].ids
+    : [];
+  const commentIds = [...prevCommentIds, ...Object.keys(newComments)];
+
+  const byVideoComment = {
+    nextPageToken: response.nextPageToken,
+    ids: commentIds
+  };
+
+  return {
+    ...prevState,
+    byId: {
+      ...prevState.byId,
+      ...newComments
+    },
+    byVideo: {
+      ...prevState.byVideo,
+      [videoId]: byVideoComment
+    }
+  };
+}
