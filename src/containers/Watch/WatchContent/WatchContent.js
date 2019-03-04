@@ -5,7 +5,11 @@ import { VideoInfoBox } from "../../../components/VideoInfoBox/VideoInfoBox";
 import { Comments } from "../../Comments/Comments";
 import { RelatedVideos } from "../../../components/RelatedVideos/RelatedVideos";
 import "./WatchContent.scss";
-import { getRelatedVideos, getVideoById } from "../../../store/reducers/videos";
+import {
+  getAmountComments,
+  getRelatedVideos,
+  getVideoById
+} from "../../../store/reducers/videos";
 import { connect } from "react-redux";
 import { getChannel } from "../../../store/reducers/channels";
 import { getCommentsForVideo } from "../../../store/reducers/comments";
@@ -24,7 +28,10 @@ class WatchContent extends React.Component {
           video={this.props.video}
           channel={this.props.channel}
         />
-        <Comments comments={this.props.comments} amountComments={112499} />
+        <Comments
+          comments={this.props.comments}
+          amountComments={this.props.amountComments}
+        />
         <RelatedVideos
           className="relatedVideos"
           videos={this.props.relatedVideos}
@@ -39,7 +46,8 @@ function mapStateToProps(state, props) {
     relatedVideos: getRelatedVideos(state, props.videoId),
     video: getVideoById(state, props.videoId),
     channel: getChannel(state, props.channelId),
-    comments: getCommentsForVideo(state, props.videoId)
+    comments: getCommentsForVideo(state, props.videoId),
+    amountComments: getAmountComments(state, props, videoId)
   };
 }
 
