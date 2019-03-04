@@ -47,7 +47,7 @@ function mapStateToProps(state, props) {
     video: getVideoById(state, props.videoId),
     channel: getChannel(state, props.channelId),
     comments: getCommentsForVideo(state, props.videoId),
-    amountComments: getAmountComments(state, props, videoId)
+    amountComments: getAmountComments(state, props.videoId)
   };
 }
 
