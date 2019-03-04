@@ -2,6 +2,7 @@ import { SUCCESS } from "../actions";
 import { WATCH_DETAILS } from "../actions/watch";
 import { COMMENT_THREAD_LIST_RESPONSE } from "../api/youtube-api-response-types";
 import { createSelector } from "reselect";
+import { COMMENT_THREAD } from "../actions/comment";
 
 const initialState = {
   byVideo: {},
@@ -10,6 +11,8 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case COMMENT_THREAD[SUCCESS]:
+      return reduceCommentThread(action.response, action.videoId, state);
     case WATCH_DETAILS[SUCCESS]:
       return reduceWatchDetails(action.response, action.videoId, state);
     default:
