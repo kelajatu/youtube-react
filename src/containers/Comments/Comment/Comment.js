@@ -22,7 +22,7 @@ export function Comment(props) {
         <div className="user-name">{authorDisplayName}</div>
         <span>{textOriginal}</span>
         <div className="comment-actions">
-          <Rating likeCount={likeCount} />
+          <Rating likeCount={likeCount} />{" "}
           <Button size="mini" compact>
             REPLY
           </Button>

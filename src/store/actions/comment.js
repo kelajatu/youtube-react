@@ -1,3 +1,11 @@
+import {
+  createAction,
+  createRequestTypes,
+  FAILURE,
+  REQUEST,
+  SUCCESS
+} from "./index";
+
 export const COMMENT_THREAD = createRequestTypes("COMMENT_THREAD");
 
 export const thread = {
