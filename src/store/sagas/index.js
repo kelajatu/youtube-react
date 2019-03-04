@@ -5,7 +5,7 @@ import {
   watchVideoCategories
 } from "./video";
 import { watchWatchDetails } from "./watch";
-// import { watchCommentThread } from "./comment";
+import { watchCommentThread } from "./comment";
 // import { watchSearchForVideos } from "./search";
 
 export default function*() {
@@ -13,8 +13,8 @@ export default function*() {
     fork(watchMostPopularVideos),
     fork(watchVideoCategories),
     fork(watchMostPopularVideosByCategory),
-    fork(watchWatchDetails)
-    // fork(watchCommentThread),
+    fork(watchWatchDetails),
+    fork(watchCommentThread)
     // fork(watchSearchForVideos)
   ]);
 }
