@@ -1,6 +1,7 @@
 import { SUCCESS } from "../actions";
 import { WATCH_DETAILS } from "../actions/watch";
 import { COMMENT_THREAD_LIST_RESPONSE } from "../api/youtube-api-response-types";
+import { createSelector } from "reselect";
 
 const initialState = {
   byVideo: {},
@@ -54,3 +55,19 @@ function reduceCommentThread(response, videoId, prevState) {
     }
   };
 }
+
+const getCommentIdsForVideo = (state, videoId) => {
+  const comment = state.comments.byVideo[videoId];
+  if (comment) {
+    return comment.ids;
+  }
+  return [];
+};
+
+export const getCommentsForVideo = createSelector(
+  getCommentIdsForVideo,
+  state => state.comments.byId,
+  (commentIds, allComments) => {
+    return commentIds.map(commentId => allComments[commentId]);
+  }
+);
