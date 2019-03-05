@@ -7,15 +7,20 @@ import { getYoutubeLibraryLoaded } from "../../store/reducers/api";
 import WatchContent from "./WatchContent/WatchContent";
 import { getSearchParam } from "../../services/url";
 import { getChannelId } from "../../store/reducers/videos";
+import { getCommentNextPageToken } from "../../store/reducers/comments";
+import * as commentActions from "../../store/actions/comment";
 
 export class Watch extends React.Component {
   render() {
     const videoId = this.getVideoId();
-    return <WatchContent videoId={videoId} channelId={this.props.channelId} />;
-  }
-
-  getVideoId() {
-    return getSearchParam(this.props.location, "v");
+    return (
+      <WatchContent
+        videoId={videoId}
+        channelId={this.props.channelId}
+        bottomReachedCallback={this.fetchMoreComments}
+        nextPageToken={this.props.nextPageToken}
+      />
+    );
   }
 
   componentDidMount() {
@@ -30,6 +35,10 @@ export class Watch extends React.Component {
     }
   }
 
+  getVideoId() {
+    return getSearchParam(this.props.location, "v");
+  }
+
   fetchWatchContent() {
     const videoId = this.getVideoId();
     if (!videoId) {
@@ -37,17 +46,28 @@ export class Watch extends React.Component {
     }
     this.props.fetchWatchDetails(videoId, this.props.channelId);
   }
+
+  fetchMoreComments = () => {
+    if (this.props.nextPageToken) {
+      this.props.fetchCommentThread(
+        this.getVideoId(),
+        this.props.nextPageToken
+      );
+    }
+  };
 }
 
 function mapStateToProps(state, props) {
   return {
     youtubeLibraryLoaded: getYoutubeLibraryLoaded(state),
-    channelId: getChannelId(state, props.location, "v")
+    channelId: getChannelId(state, props.location, "v"),
+    nextPageToken: getCommentNextPageToken(state, props.location)
   };
 }
 
 function mapDispatchToProps(dispatch) {
   const fetchWatchDetails = watchActions.details.request;
+  const fetchCommentThread = commentActions.thread.request;
   return bindActionCreators({ fetchWatchDetails }, dispatch);
 }
 
