@@ -9,6 +9,22 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 export class Trending extends React.Component {
+  componentDidMount() {
+    this.fetchTrendingVideos();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.youtubeLibraryLoaded !== this.props.youtubeLibraryLoaded) {
+      this.fetchTrendingVideos();
+    }
+  }
+
+  fetchTrendingVideos() {
+    if (this.props.youtubeLibraryLoaded) {
+      this.props.fetchMostPopularVideos(20, true);
+    }
+  }
+
   render() {
     const previews = this.getVideoPreviews();
     return (
