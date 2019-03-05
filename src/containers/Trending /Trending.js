@@ -1,7 +1,12 @@
 import React from "react";
-import "./Tredning.scss";
-import { VideoPreview } from "../../components/VideoPreview";
+import "./Trending.scss";
+import { VideoPreview } from "../../components/VideoPreview/VideoPreview";
 import { SideBar } from "../SideBar/SideBar";
+import * as videoActions from "../../store/actions/video";
+import { getMostPopularVideos } from "../../store/reducers/videos";
+import { getYoutubeLibraryLoaded } from "../../store/reducers/api";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 export class Trending extends React.Component {
   render() {
@@ -28,4 +33,19 @@ export class Trending extends React.Component {
   }
 }
 
-export default Trending;
+function mapStateToProps(state) {
+  return {
+    videos: getMostPopularVideos(state),
+    youtubeLibraryLoaded: getYoutubeLibraryLoaded(state)
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  const fetchMostPopularVideos = videoActions.mostPopular.request;
+  return bindActionCreators({ fetchMostPopularVideos }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Trending);
