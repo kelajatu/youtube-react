@@ -13,6 +13,7 @@ import {
 import { connect } from "react-redux";
 import { getChannel } from "../../../store/reducers/channels";
 import { getCommentsForVideo } from "../../../store/reducers/comments";
+import { InfiniteScroll } from "../../../components/InfiniteScroll/InfiniteScroll";
 
 class WatchContent extends React.Component {
   render() {
@@ -20,24 +21,32 @@ class WatchContent extends React.Component {
       return <div />;
     }
     return (
-      <div className="watch-grid">
-        <Video className="video" id={this.props.videoId} />
-        <VideoMetadata video={this.props.video} />
-        <VideoInfoBox
-          className="video-info-box"
-          video={this.props.video}
-          channel={this.props.channel}
-        />
-        <Comments
-          comments={this.props.comments}
-          amountComments={this.props.amountComments}
-        />
-        <RelatedVideos
-          className="relatedVideos"
-          videos={this.props.relatedVideos}
-        />
-      </div>
+      <InfiniteScroll
+        bottomReachedCallback={this.props.bottomReachedCallback}
+        showLoader={this.shouldShowLoader()}
+      >
+        <div className="watch-grid">
+          <Video className="video" id={this.props.videoId} />
+          <VideoMetadata video={this.props.video} />
+          <VideoInfoBox
+            className="video-info-box"
+            video={this.props.video}
+            channel={this.props.channel}
+          />
+          <Comments
+            comments={this.props.comments}
+            amountComments={this.props.amountComments}
+          />
+          <RelatedVideos
+            className="relatedVideos"
+            videos={this.props.relatedVideos}
+          />
+        </div>
+      </InfiniteScroll>
     );
+  }
+  shouldShowLoader() {
+    return !!this.props.nextPageToken;
   }
 }
 

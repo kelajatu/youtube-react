@@ -68,7 +68,10 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
   const fetchWatchDetails = watchActions.details.request;
   const fetchCommentThread = commentActions.thread.request;
-  return bindActionCreators({ fetchWatchDetails }, dispatch);
+  return bindActionCreators(
+    { fetchWatchDetails, fetchCommentThread },
+    dispatch
+  );
 }
 
 export default withRouter(
