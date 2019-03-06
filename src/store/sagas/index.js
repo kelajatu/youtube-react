@@ -6,7 +6,7 @@ import {
 } from "./video";
 import { watchWatchDetails } from "./watch";
 import { watchCommentThread } from "./comment";
-// import { watchSearchForVideos } from "./search";
+import { watchSearchForVideos } from "./search";
 
 export default function*() {
   yield all([
@@ -14,8 +14,8 @@ export default function*() {
     fork(watchVideoCategories),
     fork(watchMostPopularVideosByCategory),
     fork(watchWatchDetails),
-    fork(watchCommentThread)
-    // fork(watchSearchForVideos)
+    fork(watchCommentThread),
+    fork(watchSearchForVideos)
   ]);
 }
 
