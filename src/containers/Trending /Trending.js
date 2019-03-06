@@ -1,7 +1,6 @@
 import React from "react";
-import "./Trending.scss";
-import { VideoPreview } from "../../components/VideoPreview/VideoPreview";
-import { SideBar } from "../SideBar/SideBar";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import * as videoActions from "../../store/actions/video";
 import {
   allMostPopularVideosLoaded,
@@ -9,9 +8,7 @@ import {
   getMostPopularVideosNextPageToken
 } from "../../store/reducers/videos";
 import { getYoutubeLibraryLoaded } from "../../store/reducers/api";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { InfiniteScroll } from "../../components/InfiniteScroll/InfiniteScroll";
+import { VideoList } from "../../components/VideoList/VideoList";
 
 class Trending extends React.Component {
   componentDidMount() {
@@ -24,32 +21,16 @@ class Trending extends React.Component {
     }
   }
 
-  fetchTrendingVideos() {
-    if (this.props.youtubeLibraryLoaded) {
-      this.props.fetchMostPopularVideos(20, true);
-    }
-  }
-
   render() {
-    const previews = this.getVideoPreviews();
     const loaderActive = this.shouldShowLoader();
-    return (
-      <React.Fragment>
-        <SideBar />
-        <div className="trending">
-          <InfiniteScroll
-            bottomReachedCallback={this.fetchMoreVideos}
-            showLoader={loaderActive}
-          >
-            {previews}
-          </InfiniteScroll>
-        </div>
-      </React.Fragment>
-    );
-  }
 
-  shouldShowLoader() {
-    return !this.props.allMostPopularVideosLoaded;
+    return (
+      <VideoList
+        bottomReachedCallback={this.fetchMoreVideos}
+        showLoader={loaderActive}
+        videos={this.props.videos}
+      />
+    );
   }
 
   fetchMoreVideos = () => {
@@ -59,17 +40,14 @@ class Trending extends React.Component {
     }
   };
 
-  getVideoPreviews() {
-    return this.props.videos.map(video => (
-      <VideoPreview
-        horizontal={true}
-        expanded={true}
-        video={video}
-        key={video.id}
-        pathname={"/watch"}
-        search={"?v=" + video.id}
-      />
-    ));
+  fetchTrendingVideos() {
+    if (this.props.youtubeLibraryLoaded) {
+      this.props.fetchMostPopularVideos(20, true);
+    }
+  }
+
+  shouldShowLoader() {
+    return !this.props.allMostPopularVideosLoaded;
   }
 }
 
