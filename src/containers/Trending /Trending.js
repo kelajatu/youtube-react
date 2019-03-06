@@ -11,6 +11,7 @@ import {
 import { getYoutubeLibraryLoaded } from "../../store/reducers/api";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { InfiniteScroll } from "../../components/InfiniteScroll/InfiniteScroll";
 
 class Trending extends React.Component {
   componentDidMount() {
@@ -31,13 +32,32 @@ class Trending extends React.Component {
 
   render() {
     const previews = this.getVideoPreviews();
+    const loaderActive = this.shouldShowLoader();
     return (
       <React.Fragment>
         <SideBar />
-        <div className="trending">{previews}</div>
+        <div className="trending">
+          <InfiniteScroll
+            bottomReachedCallback={this.fetchMoreVideos}
+            showLoader={loaderActive}
+          >
+            {previews}
+          </InfiniteScroll>
+        </div>
       </React.Fragment>
     );
   }
+
+  shouldShowLoader() {
+    return !this.props.allMostPopularVideosLoaded;
+  }
+
+  fetchMoreVideos = () => {
+    const { nextPageToken } = this.props;
+    if (this.props.youtubeLibraryLoaded && nextPageToken) {
+      this.props.fetchMostPopularVideos(12, true, nextPageToken);
+    }
+  };
 
   getVideoPreviews() {
     return this.props.videos.map(video => (
