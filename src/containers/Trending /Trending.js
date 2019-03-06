@@ -3,12 +3,16 @@ import "./Trending.scss";
 import { VideoPreview } from "../../components/VideoPreview/VideoPreview";
 import { SideBar } from "../SideBar/SideBar";
 import * as videoActions from "../../store/actions/video";
-import { getMostPopularVideos } from "../../store/reducers/videos";
+import {
+  allMostPopularVideosLoaded,
+  getMostPopularVideos,
+  getMostPopularVideosNextPageToken
+} from "../../store/reducers/videos";
 import { getYoutubeLibraryLoaded } from "../../store/reducers/api";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-export class Trending extends React.Component {
+class Trending extends React.Component {
   componentDidMount() {
     this.fetchTrendingVideos();
   }
@@ -52,7 +56,9 @@ export class Trending extends React.Component {
 function mapStateToProps(state) {
   return {
     videos: getMostPopularVideos(state),
-    youtubeLibraryLoaded: getYoutubeLibraryLoaded(state)
+    youtubeLibraryLoaded: getYoutubeLibraryLoaded(state),
+    allMostPopularVideosLoaded: allMostPopularVideosLoaded(state),
+    nextPageToken: getMostPopularVideosNextPageToken(state)
   };
 }
 

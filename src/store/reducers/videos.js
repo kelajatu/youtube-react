@@ -205,7 +205,6 @@ function reduceRelatedVideos(responses, videoIds) {
  *   Selectors
  * */
 const getMostPopular = state => state.videos.mostPopular;
-
 export const getMostPopularVideos = createSelector(
   state => state.videos.byId,
   getMostPopular,
