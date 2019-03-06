@@ -1,17 +1,45 @@
-@import '../../styles/shared.scss';
+import React from "react";
+import { SideBar } from "../../containers/SideBar/SideBar";
+import { InfiniteScroll } from "../InfiniteScroll/InfiniteScroll";
+import "./VideoList.scss";
+import { VideoPreview } from "../VideoPreview/VideoPreview";
 
-.video-list {
-  display: grid;
-  grid: auto / auto;
-  padding-left: 10rem;
-  padding-top: 24px;
-  margin-left: $sidebar-left-width;
-  grid-row-gap: 10px;
-  max-width: 900px;
-}
+export class VideoList extends React.Component {
+  render() {
+    const videoPreviews = this.getVideoPreviews();
+    return (
+      <React.Fragment>
+        <SideBar />
+        <div className="video-list">
+          <InfiniteScroll
+            bottomReachedCallback={this.props.bottomReachedCallback}
+            showLoader={this.props.showLoader}
+          >
+            {videoPreviews}
+          </InfiniteScroll>
+        </div>
+      </React.Fragment>
+    );
+  }
 
-@media(max-width: 1200px) {
-  .video-list {
-    padding-left: 10px;
+  getVideoPreviews() {
+    if (!this.props.videos || !this.props.videos.length) {
+      return null;
+    }
+    const firstVideo = this.props.videos[0];
+    if (!firstVideo.snippet.description) {
+      return null;
+    }
+
+    return this.props.videos.map(video => (
+      <VideoPreview
+        horizontal={true}
+        expanded={true}
+        video={video}
+        key={video.id}
+        pathname={"/watch"}
+        search={"?v=" + video.id}
+      />
+    ));
   }
 }
