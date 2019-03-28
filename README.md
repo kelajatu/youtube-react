@@ -61,7 +61,7 @@ yarn install
 
 ## Running the application
 
-**To run the application, execute**
+To run the application, execute:
 
 ```
 npm start
@@ -76,7 +76,7 @@ yarn start
 # Tests
 
 This project contains an extensive suite of tests comprised of [Jest](https://jestjs.io/) and [Enzyme](https://github.com/airbnb/enzyme).
-Run all tests by executing.
+Run all tests by executing:
 
 ```
 npm test
@@ -90,7 +90,7 @@ yarn test
 
 # Features
 
-This application includes the major features of Youtube such as
+This application includes the major features of Youtube such as:
 
 - Home feed with infinite scroll
 - Trending videos
