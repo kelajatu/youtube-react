@@ -73,7 +73,7 @@ or with [yarn](https://yarnpkg.com/lang/en/)
 yarn start
 ```
 
-# 5 Tests
+# Tests
 
 This project contains an extensive suite of tests comprised of [Jest](https://jestjs.io/) and [Enzyme](https://github.com/airbnb/enzyme).
 Run all tests by executing.
@@ -87,3 +87,31 @@ You can also use [yarn](https://yarnpkg.com/lang/en/) to run the tests.
 ```
 yarn test
 ```
+
+# Features
+
+This application includes the major features of Youtube such as
+
+- Home feed with infinite scroll
+- Trending videos
+- Searching for videos
+- Watching videos
+- Displaying comments and video details
+
+# Technologies
+
+- [React / create-react-app](https://github.com/facebook/create-react-app)
+- [Redux](https://redux.js.org/)
+- [Redux-saga](https://redux-saga.js.org/)
+- [Redux-reselect](https://github.com/reduxjs/reselect)
+- [Jest](https://jestjs.io/)
+- [Enzyme](https://airbnb.io/enzyme/)
+- [Semantic UI](https://react.semantic-ui.com/)
+- CSS Grid / Flexbox
+
+## License
+
+[MIT](https://tldrlegal.com/license/mit-license)
+
+> Portfolio [jurgenkela.com](https://www.jurgenkela.com/)
+> GitHub [@kelajatu](https://github.com/amitmerchant1990)
