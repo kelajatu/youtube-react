@@ -82,7 +82,7 @@ Run all tests by executing:
 npm test
 ```
 
-You can also use [yarn](https://yarnpkg.com/lang/en/) to run the tests.
+You can also use [yarn](https://yarnpkg.com/lang/en/) to run the tests
 
 ```
 yarn test
