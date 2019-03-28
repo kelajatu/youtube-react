@@ -72,3 +72,18 @@ or with [yarn](https://yarnpkg.com/lang/en/)
 ```
 yarn start
 ```
+
+# 5 Tests
+
+This project contains an extensive suite of tests comprised of [Jest](https://jestjs.io/) and [Enzyme](https://github.com/airbnb/enzyme).
+Run all tests by executing.
+
+```
+npm test
+```
+
+You can also use [yarn](https://yarnpkg.com/lang/en/) to run the tests.
+
+```
+yarn test
+```
